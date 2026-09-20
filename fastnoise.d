@@ -52,6 +52,8 @@
 // /*FNLfloat*/ float
 // /*FNLfloat*/ double
 
+module fastnoise;
+
 import std.stdio;
 import std.conv;
 import std.array;
@@ -63,7 +65,7 @@ import std.range;
 import std.math;
 import core.thread;
 
-public class FastNoiseLite {
+public class FastNoise {
 
     public enum NoiseType {
         OpenSimplex2,
@@ -2406,5 +2408,3 @@ public class FastNoiseLite {
         }
     }
 }
-
-void main(){}
