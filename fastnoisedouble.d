@@ -309,8 +309,8 @@ public class FastNoise {
         y *= mFrequency;
 
         switch (mNoiseType){
-            case mNoiseType.OpenSimplex2:
-            case mNoiseType.OpenSimplex2S:
+            case NoiseType.OpenSimplex2:
+            case NoiseType.OpenSimplex2S:
                 {
                     /*FNLfloat*/ double SQRT3 = /*FNLfloat*/ to!double(1.7320508075688772935274463415059);
                     /*FNLfloat*/ double F2 = 0.5f * (SQRT3 - 1);
@@ -326,11 +326,11 @@ public class FastNoise {
         switch (mFractalType){
             default:
                 return GenNoiseSingle(mSeed, x, y);
-            case mFractalType.FBm:
+            case FractalType.FBm:
                 return GenFractalFBm(x, y);
-            case mFractalType.Ridged:
+            case FractalType.Ridged:
                 return GenFractalRidged(x, y);
-            case mFractalType.PingPong:
+            case FractalType.PingPong:
                 return GenFractalPingPong(x, y);
         }
     }
@@ -347,7 +347,7 @@ public class FastNoise {
         z *= mFrequency;
 
         switch (mTransformType3D){
-            case mTransformType3D.ImproveXYPlanes:
+            case TransformType3D.ImproveXYPlanes:
                 {
                     /*FNLfloat*/ double xy = x + y;
                     /*FNLfloat*/ double s2 = xy * /*FNLfloat*/ -to!double(0.211324865405187);
@@ -357,7 +357,7 @@ public class FastNoise {
                     z += xy * /*FNLfloat*/ to!double(0.577350269189626);
                 }
                 break;
-            case mTransformType3D.ImproveXZPlanes:
+            case TransformType3D.ImproveXZPlanes:
                 {
                     /*FNLfloat*/ double xz = x + z;
                     /*FNLfloat*/ double s2 = xz * /*FNLfloat*/ -to!double(0.211324865405187);
@@ -367,7 +367,7 @@ public class FastNoise {
                     y += xz * /*FNLfloat*/ to!double(0.577350269189626);
                 }
                 break;
-            case mTransformType3D.DefaultOpenSimplex2:
+            case TransformType3D.DefaultOpenSimplex2:
                 {
                     /*FNLfloat*/ double R3 = /*FNLfloat*/ to!double(2.0 / 3.0);
                     /*FNLfloat*/ double r = (x + y + z) * R3; // Rotation, not skew
@@ -383,11 +383,11 @@ public class FastNoise {
         switch (mFractalType){
             default:
                 return GenNoiseSingle(mSeed, x, y, z);
-            case mFractalType.FBm:
+            case FractalType.FBm:
                 return GenFractalFBm(x, y, z);
-            case mFractalType.Ridged:
+            case FractalType.Ridged:
                 return GenFractalRidged(x, y, z);
-            case mFractalType.PingPong:
+            case FractalType.PingPong:
                 return GenFractalPingPong(x, y, z);
         }
     }
@@ -406,10 +406,10 @@ public class FastNoise {
             default:
                 DomainWarpSingle(coord);
                 break;
-            case mFractalType.DomainWarpProgressive:
+            case FractalType.DomainWarpProgressive:
                 DomainWarpFractalProgressive(coord);
                 break;
-            case mFractalType.DomainWarpIndependent:
+            case FractalType.DomainWarpIndependent:
                 DomainWarpFractalIndependent(coord);
                 break;
         }
@@ -428,10 +428,10 @@ public class FastNoise {
             default:
                 DomainWarpSingle(coord);
                 break;
-            case mFractalType.DomainWarpProgressive:
+            case FractalType.DomainWarpProgressive:
                 DomainWarpFractalProgressive(coord);
                 break;
-            case mFractalType.DomainWarpIndependent:
+            case FractalType.DomainWarpIndependent:
                 DomainWarpFractalIndependent(coord);
                 break;
         }
@@ -665,17 +665,17 @@ public class FastNoise {
 
     private float GenNoiseSingle(int seed, /*FNLfloat*/ double x, /*FNLfloat*/ double y){
         switch (mNoiseType){
-            case mNoiseType.OpenSimplex2:
+            case NoiseType.OpenSimplex2:
                 return SingleSimplex(seed, x, y);
-            case mNoiseType.OpenSimplex2S:
+            case NoiseType.OpenSimplex2S:
                 return SingleOpenSimplex2S(seed, x, y);
-            case mNoiseType.Cellular:
+            case NoiseType.Cellular:
                 return SingleCellular(seed, x, y);
-            case mNoiseType.Perlin:
+            case NoiseType.Perlin:
                 return SinglePerlin(seed, x, y);
-            case mNoiseType.ValueCubic:
+            case NoiseType.ValueCubic:
                 return SingleValueCubic(seed, x, y);
-            case mNoiseType.Value:
+            case NoiseType.Value:
                 return SingleValue(seed, x, y);
             default:
                 return 0;
@@ -684,17 +684,17 @@ public class FastNoise {
 
     private float GenNoiseSingle(int seed, /*FNLfloat*/ double x, /*FNLfloat*/ double y, /*FNLfloat*/ double z){
         switch (mNoiseType){
-            case mNoiseType.OpenSimplex2:
+            case NoiseType.OpenSimplex2:
                 return SingleOpenSimplex2(seed, x, y, z);
-            case mNoiseType.OpenSimplex2S:
+            case NoiseType.OpenSimplex2S:
                 return SingleOpenSimplex2S(seed, x, y, z);
-            case mNoiseType.Cellular:
+            case NoiseType.Cellular:
                 return SingleCellular(seed, x, y, z);
-            case mNoiseType.Perlin:
+            case NoiseType.Perlin:
                 return SinglePerlin(seed, x, y, z);
-            case mNoiseType.ValueCubic:
+            case NoiseType.ValueCubic:
                 return SingleValueCubic(seed, x, y, z);
-            case mNoiseType.Value:
+            case NoiseType.Value:
                 return SingleValue(seed, x, y, z);
             default:
                 return 0;
@@ -706,16 +706,16 @@ public class FastNoise {
 
     private void UpdateTransformType3D(){
         switch (mRotationType3D){
-            case mRotationType3D.ImproveXYPlanes:
+            case RotationType3D.ImproveXYPlanes:
                 mTransformType3D = TransformType3D.ImproveXYPlanes;
                 break;
-            case mRotationType3D.ImproveXZPlanes:
+            case RotationType3D.ImproveXZPlanes:
                 mTransformType3D = TransformType3D.ImproveXZPlanes;
                 break;
             default:
                 switch (mNoiseType){
-                    case mNoiseType.OpenSimplex2:
-                    case mNoiseType.OpenSimplex2S:
+                    case NoiseType.OpenSimplex2:
+                    case NoiseType.OpenSimplex2S:
                         mTransformType3D = TransformType3D.DefaultOpenSimplex2;
                         break;
                     default:
@@ -728,16 +728,16 @@ public class FastNoise {
 
     private void UpdateWarpTransformType3D(){
         switch (mRotationType3D){
-            case mRotationType3D.ImproveXYPlanes:
+            case RotationType3D.ImproveXYPlanes:
                 mWarpTransformType3D = TransformType3D.ImproveXYPlanes;
                 break;
-            case mRotationType3D.ImproveXZPlanes:
+            case RotationType3D.ImproveXZPlanes:
                 mWarpTransformType3D = TransformType3D.ImproveXZPlanes;
                 break;
             default:
                 switch (mDomainWarpType){
-                    case mDomainWarpType.OpenSimplex2:
-                    case mDomainWarpType.OpenSimplex2Reduced:
+                    case DomainWarpType.OpenSimplex2:
+                    case DomainWarpType.OpenSimplex2Reduced:
                         mWarpTransformType3D = TransformType3D.DefaultOpenSimplex2;
                         break;
                     default:
@@ -1314,8 +1314,8 @@ public class FastNoise {
 
         switch (mCellularDistanceFunction){
             default:
-            case mCellularDistanceFunction.Euclidean:
-            case mCellularDistanceFunction.EuclideanSq:
+            case CellularDistanceFunction.Euclidean:
+            case CellularDistanceFunction.EuclideanSq:
                 for (int xi = xr - 1; xi <= xr + 1; xi++){
                     int yPrimed = yPrimedBase;
 
@@ -1338,7 +1338,7 @@ public class FastNoise {
                     xPrimed += PrimeX;
                 }
                 break;
-            case mCellularDistanceFunction.Manhattan:
+            case CellularDistanceFunction.Manhattan:
                 for (int xi = xr - 1; xi <= xr + 1; xi++){
                     int yPrimed = yPrimedBase;
 
@@ -1361,7 +1361,7 @@ public class FastNoise {
                     xPrimed += PrimeX;
                 }
                 break;
-            case mCellularDistanceFunction.Hybrid:
+            case CellularDistanceFunction.Hybrid:
                 for (int xi = xr - 1; xi <= xr + 1; xi++){
                     int yPrimed = yPrimedBase;
 
@@ -1395,19 +1395,19 @@ public class FastNoise {
         }
 
         switch (mCellularReturnType){
-            case mCellularReturnType.CellValue:
+            case CellularReturnType.CellValue:
                 return closestHash * (1 / 2147483648.0f);
-            case mCellularReturnType.Distance:
+            case CellularReturnType.Distance:
                 return distance0 - 1;
-            case mCellularReturnType.Distance2:
+            case CellularReturnType.Distance2:
                 return distance1 - 1;
-            case mCellularReturnType.Distance2Add:
+            case CellularReturnType.Distance2Add:
                 return (distance1 + distance0) * 0.5f - 1;
-            case mCellularReturnType.Distance2Sub:
+            case CellularReturnType.Distance2Sub:
                 return distance1 - distance0 - 1;
-            case mCellularReturnType.Distance2Mul:
+            case CellularReturnType.Distance2Mul:
                 return distance1 * distance0 * 0.5f - 1;
-            case mCellularReturnType.Distance2Div:
+            case CellularReturnType.Distance2Div:
                 return distance0 / distance1 - 1;
             default:
                 return 0;
@@ -1430,8 +1430,8 @@ public class FastNoise {
         int zPrimedBase = (zr - 1) * PrimeZ;
 
         switch (mCellularDistanceFunction){
-            case mCellularDistanceFunction.Euclidean:
-            case mCellularDistanceFunction.EuclideanSq:
+            case CellularDistanceFunction.Euclidean:
+            case CellularDistanceFunction.EuclideanSq:
                 for (int xi = xr - 1; xi <= xr + 1; xi++){
                     int yPrimed = yPrimedBase;
 
@@ -1460,7 +1460,7 @@ public class FastNoise {
                     xPrimed += PrimeX;
                 }
                 break;
-            case mCellularDistanceFunction.Manhattan:
+            case CellularDistanceFunction.Manhattan:
                 for (int xi = xr - 1; xi <= xr + 1; xi++){
                     int yPrimed = yPrimedBase;
 
@@ -1489,7 +1489,7 @@ public class FastNoise {
                     xPrimed += PrimeX;
                 }
                 break;
-            case mCellularDistanceFunction.Hybrid:
+            case CellularDistanceFunction.Hybrid:
                 for (int xi = xr - 1; xi <= xr + 1; xi++){
                     int yPrimed = yPrimedBase;
 
@@ -1531,19 +1531,19 @@ public class FastNoise {
         }
 
         switch (mCellularReturnType){
-            case mCellularReturnType.CellValue:
+            case CellularReturnType.CellValue:
                 return closestHash * (1 / 2147483648.0f);
-            case mCellularReturnType.Distance:
+            case CellularReturnType.Distance:
                 return distance0 - 1;
-            case mCellularReturnType.Distance2:
+            case CellularReturnType.Distance2:
                 return distance1 - 1;
-            case mCellularReturnType.Distance2Add:
+            case CellularReturnType.Distance2Add:
                 return (distance1 + distance0) * 0.5f - 1;
-            case mCellularReturnType.Distance2Sub:
+            case CellularReturnType.Distance2Sub:
                 return distance1 - distance0 - 1;
-            case mCellularReturnType.Distance2Mul:
+            case CellularReturnType.Distance2Mul:
                 return distance1 * distance0 * 0.5f - 1;
-            case mCellularReturnType.Distance2Div:
+            case CellularReturnType.Distance2Div:
                 return distance0 / distance1 - 1;
             default:
                 return 0;
@@ -1747,13 +1747,13 @@ public class FastNoise {
 
     private void DoSingleDomainWarp(int seed, float amp, float freq, /*FNLfloat*/ double x, /*FNLfloat*/ double y, Vector2 coord){
         switch (mDomainWarpType){
-            case mDomainWarpType.OpenSimplex2:
+            case DomainWarpType.OpenSimplex2:
                 SingleDomainWarpSimplexGradient(seed, amp * 38.283687591552734375f, freq, x, y, coord, false);
                 break;
-            case mDomainWarpType.OpenSimplex2Reduced:
+            case DomainWarpType.OpenSimplex2Reduced:
                 SingleDomainWarpSimplexGradient(seed, amp * 16.0f, freq, x, y, coord, true);
                 break;
-            case mDomainWarpType.BasicGrid:
+            case DomainWarpType.BasicGrid:
                 SingleDomainWarpBasicGrid(seed, amp, freq, x, y, coord);
                 break;
             default:
@@ -1763,13 +1763,13 @@ public class FastNoise {
 
     private void DoSingleDomainWarp(int seed, float amp, float freq, /*FNLfloat*/ double x, /*FNLfloat*/ double y, /*FNLfloat*/ double z, Vector3 coord){
         switch (mDomainWarpType){
-            case mDomainWarpType.OpenSimplex2:
+            case DomainWarpType.OpenSimplex2:
                 SingleDomainWarpOpenSimplex2Gradient(seed, amp * 32.69428253173828125f, freq, x, y, z, coord, false);
                 break;
-            case mDomainWarpType.OpenSimplex2Reduced:
+            case DomainWarpType.OpenSimplex2Reduced:
                 SingleDomainWarpOpenSimplex2Gradient(seed, amp * 7.71604938271605f, freq, x, y, z, coord, true);
                 break;
-            case mDomainWarpType.BasicGrid:
+            case DomainWarpType.BasicGrid:
                 SingleDomainWarpBasicGrid(seed, amp, freq, x, y, z, coord);
                 break;
             default:
@@ -1788,8 +1788,8 @@ public class FastNoise {
         /*FNLfloat*/ double xs = coord.x;
         /*FNLfloat*/ double ys = coord.y;
         switch (mDomainWarpType){
-            case mDomainWarpType.OpenSimplex2:
-            case mDomainWarpType.OpenSimplex2Reduced:
+            case DomainWarpType.OpenSimplex2:
+            case DomainWarpType.OpenSimplex2Reduced:
                 {
                     /*FNLfloat*/ double SQRT3 = /*FNLfloat*/ to!double(1.7320508075688772935274463415059);
                     /*FNLfloat*/ double F2 = 0.5f * (SQRT3 - 1);
@@ -1813,7 +1813,7 @@ public class FastNoise {
         /*FNLfloat*/ double ys = coord.y;
         /*FNLfloat*/ double zs = coord.z;
         switch (mWarpTransformType3D){
-            case mWarpTransformType3D.ImproveXYPlanes: 
+            case WarpTransformType3D.ImproveXYPlanes: 
                 {
                     /*FNLfloat*/ double xy = xs + ys;
                     /*FNLfloat*/ double s2 = xy * /*FNLfloat*/ -to!double(0.211324865405187);
@@ -1823,7 +1823,7 @@ public class FastNoise {
                     zs += xy * /*FNLfloat*/ to!double(0.577350269189626);
                 }
                 break;
-            case mWarpTransformType3D.ImproveXZPlanes:
+            case WarpTransformType3D.ImproveXZPlanes:
                 {
                     /*FNLfloat*/ double xz = xs + zs;
                     /*FNLfloat*/ double s2 = xz * /*FNLfloat*/ -to!double(0.211324865405187);
@@ -1832,7 +1832,7 @@ public class FastNoise {
                     ys += xz * /*FNLfloat*/ to!double(0.577350269189626);
                 }
                 break;
-            case mWarpTransformType3D.DefaultOpenSimplex2:
+            case WarpTransformType3D.DefaultOpenSimplex2:
                 {
                     /*FNLfloat*/ double R3 = /*FNLfloat*/ to!double(2.0 / 3.0);
                     /*FNLfloat*/ double r = (xs + ys + zs) * R3; // Rotation, not skew
@@ -1860,8 +1860,8 @@ public class FastNoise {
             /*FNLfloat*/ double xs = coord.x;
             /*FNLfloat*/ double ys = coord.y;
             switch (mDomainWarpType){
-                case mDomainWarpType.OpenSimplex2:
-                case mDomainWarpType.OpenSimplex2Reduced:
+                case DomainWarpType.OpenSimplex2:
+                case DomainWarpType.OpenSimplex2Reduced:
                     {
                         /*FNLfloat*/ double SQRT3 = /*FNLfloat*/ to!double(1.7320508075688772935274463415059);
                         /*FNLfloat*/ double F2 = 0.5f * (SQRT3 - 1);
@@ -1891,7 +1891,7 @@ public class FastNoise {
             /*FNLfloat*/ double ys = coord.y;
             /*FNLfloat*/ double zs = coord.z;
             switch (mWarpTransformType3D){
-                case mWarpTransformType3D.ImproveXYPlanes:
+                case WarpTransformType3D.ImproveXYPlanes:
                     {
                         /*FNLfloat*/ double xy = xs + ys;
                         /*FNLfloat*/ double s2 = xy * /*FNLfloat*/ -to!double(0.211324865405187);
@@ -1901,7 +1901,7 @@ public class FastNoise {
                         zs += xy * /*FNLfloat*/ to!double(0.577350269189626);
                     }
                     break;
-                case mWarpTransformType3D.ImproveXZPlanes:
+                case WarpTransformType3D.ImproveXZPlanes:
                     {
                         /*FNLfloat*/ double xz = xs + zs;
                         /*FNLfloat*/ double s2 = xz * /*FNLfloat*/ -to!double(0.211324865405187);
@@ -1910,7 +1910,7 @@ public class FastNoise {
                         ys += xz * /*FNLfloat*/ to!double(0.577350269189626);
                     }
                     break;
-                case mWarpTransformType3D.DefaultOpenSimplex2:
+                case WarpTransformType3D.DefaultOpenSimplex2:
                     {
                         /*FNLfloat*/ double R3 = /*FNLfloat*/ to!double(2.0 / 3.0);
                         /*FNLfloat*/ double r = (xs + ys + zs) * R3; // Rotation, not skew
@@ -1937,8 +1937,8 @@ public class FastNoise {
         /*FNLfloat*/ double xs = coord.x;
         /*FNLfloat*/ double ys = coord.y;
         switch (mDomainWarpType){
-            case mDomainWarpType.OpenSimplex2:
-            case mDomainWarpType.OpenSimplex2Reduced:
+            case DomainWarpType.OpenSimplex2:
+            case DomainWarpType.OpenSimplex2Reduced:
                 {
                     /*FNLfloat*/ double SQRT3 = /*FNLfloat*/ to!double(1.7320508075688772935274463415059);
                     /*FNLfloat*/ double F2 = 0.5f * (SQRT3 - 1);
@@ -1968,7 +1968,7 @@ public class FastNoise {
         /*FNLfloat*/ double ys = coord.y;
         /*FNLfloat*/ double zs = coord.z;
         switch (mWarpTransformType3D){
-            case mWarpTransformType3D.ImproveXYPlanes:
+            case WarpTransformType3D.ImproveXYPlanes:
                 {
                     /*FNLfloat*/ double xy = xs + ys;
                     /*FNLfloat*/ double s2 = xy * /*FNLfloat*/ -to!double(0.211324865405187);
@@ -1978,7 +1978,7 @@ public class FastNoise {
                     zs += xy * /*FNLfloat*/ to!double(0.577350269189626);
                 }
                 break;
-            case mWarpTransformType3D.ImproveXZPlanes:
+            case WarpTransformType3D.ImproveXZPlanes:
                 {
                     /*FNLfloat*/ double xz = xs + zs;
                     /*FNLfloat*/ double s2 = xz * /*FNLfloat*/ -to!double(0.211324865405187);
@@ -1987,7 +1987,7 @@ public class FastNoise {
                     ys += xz * /*FNLfloat*/ to!double(0.577350269189626);
                 }
                 break;
-            case mWarpTransformType3D.DefaultOpenSimplex2:
+            case WarpTransformType3D.DefaultOpenSimplex2:
                 {
                     /*FNLfloat*/ double R3 = /*FNLfloat*/ to!double(2.0 / 3.0);
                     /*FNLfloat*/ double r = (xs + ys + zs) * R3; // Rotation, not skew
