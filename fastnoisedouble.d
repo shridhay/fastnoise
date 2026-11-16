@@ -51,6 +51,7 @@
 // perform a file-wide replace on the following strings (including /*FNLfloat*/)
 // /*FNLfloat*/ float
 // /*FNLfloat*/ double
+// /*FNLfloat*/ real
 
 module fastnoise;
 
