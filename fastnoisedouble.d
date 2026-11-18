@@ -66,7 +66,7 @@ import std.range;
 import std.math;
 import core.thread;
 
-public class FastNoise {
+class FastNoise {
 
     public enum NoiseType {
         OpenSimplex2,
